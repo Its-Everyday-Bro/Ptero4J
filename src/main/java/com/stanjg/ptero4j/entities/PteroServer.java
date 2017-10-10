@@ -1,5 +1,7 @@
 package com.stanjg.ptero4j.entities;
 
+import com.stanjg.ptero4j.PteroAPI;
+
 /**
  * Created by Stan Gabes on 10-10-2017.
  * Ask permission to Stan#1185 on discord in order to use this class. Unless specified otherwise
@@ -56,6 +58,12 @@ public class PteroServer {
         this.nodeId = nodeId;
         this.username = username;
     }
+
+
+    public PteroUser getOwner() {
+        return PteroAPI.getInstance().getUser(owner_id);
+    }
+
 
     public int getId() {
         return id;

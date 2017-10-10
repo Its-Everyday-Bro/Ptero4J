@@ -14,6 +14,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class PteroAPI {
 
+    private static PteroAPI instance;
+    public static PteroAPI getInstance() {
+        return instance;
+    }
+
     private String publicToken, privateToken;
 
     private Queue<PteroUser> cachedUsers;
@@ -23,6 +28,8 @@ public class PteroAPI {
     private int cacheSize;
 
     public PteroAPI(String publicToken, String privateToken, String baseUrl, boolean withCache, int cacheSize) {
+        instance = this;
+
         this.publicToken = publicToken;
         this.privateToken = privateToken;
         this.withCaching = withCache;

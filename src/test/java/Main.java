@@ -11,15 +11,14 @@ import com.stanjg.ptero4j.entities.PteroUser;
 public class Main {
 
     public static void main(String[] args) {
-        PteroAPI pteroAPI = new PteroAPIBuilder()
+        PteroAPI api = new PteroAPIBuilder()
                 .withPublicToken("")
                 .withPrivateToken("")
                 .withBaseUrl("")
                 .withCaching(true)
                 .build();
 
-        testCachingWithServer(pteroAPI);
-
+        System.out.println(api.getServer(32).getOwner().getFullName());
     }
 
     /**
