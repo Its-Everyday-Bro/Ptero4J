@@ -1,5 +1,6 @@
 import com.stanjg.ptero4j.PteroAPI;
 import com.stanjg.ptero4j.PteroAPIBuilder;
+import com.stanjg.ptero4j.entities.PteroServer;
 import com.stanjg.ptero4j.entities.PteroUser;
 
 /**
@@ -17,13 +18,39 @@ public class Main {
                 .withCaching(true)
                 .build();
 
-        /*
-        A test to test how big the effect of caching is
-         */
+        testCachingWithServer(pteroAPI);
+
+    }
+
+    /**
+     * A test to see how big the impact of caching is
+     */
+    private static void testCachingWithServer(PteroAPI api) {
 
         long start = System.currentTimeMillis();
 
-        PteroUser user = pteroAPI.getUser(2);
+        PteroServer server = api.getServer(32);
+        System.out.println(server.getId() + " " + server.getCpu());
+
+        System.out.println(System.currentTimeMillis() - start);
+
+
+        start = System.currentTimeMillis();
+
+        server = api.getServer(32);
+        System.out.println(server.getId() + " " + server.getCpu());
+
+        System.out.println(System.currentTimeMillis() - start);
+    }
+
+    /**
+     * A test to see how big the impact of caching is
+     */
+    private static void testCachingWithUser(PteroAPI api) {
+
+        long start = System.currentTimeMillis();
+
+        PteroUser user = api.getUser(2);
         System.out.println(user.getId() + " " + user.getFullName());
 
         System.out.println(System.currentTimeMillis() - start);
@@ -31,7 +58,7 @@ public class Main {
 
         start = System.currentTimeMillis();
 
-        user = pteroAPI.getUser(2);
+        user = api.getUser(2);
         System.out.println(user.getId() + " " + user.getFullName());
 
         System.out.println(System.currentTimeMillis() - start);
